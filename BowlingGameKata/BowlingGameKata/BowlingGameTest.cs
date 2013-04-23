@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BowlingGameKata
 {
@@ -39,13 +34,32 @@ namespace BowlingGameKata
         }
 
         [TestMethod]
-        public void TestOneSpare()
+        public void TestOneSpareWithZeros()
         {
             RollSpare();
             g.Roll(3);
             RollMany(17, 0);
 
             Assert.AreEqual(16, g.Score());
+        }
+
+        [TestMethod]
+        public void TestOneSpareWithOnes()
+        {
+            RollSpare();
+            RollMany(18, 1);
+
+            Assert.AreEqual(29, g.Score());
+        }
+
+        [TestMethod]
+        public void TestSpareInLastRow()
+        {
+            RollMany(18, 1);
+            RollSpare();
+            RollMany(1, 1);
+
+            Assert.AreEqual(29, g.Score());
         }
 
         [TestMethod]
@@ -60,11 +74,46 @@ namespace BowlingGameKata
         }
 
         [TestMethod]
+        public void TestOneStrikeWithOnes()
+        {
+            RollStrike();
+            RollMany(18, 1);
+
+            Assert.AreEqual(30, g.Score());
+        }
+
+        [TestMethod]
+        public void TestStrikeInLastRow()
+        {
+            RollMany(18, 1);
+            RollStrike();
+            RollMany(2, 1);
+
+            Assert.AreEqual(30, g.Score());
+        }
+
+        [TestMethod]
         public void TestPerfectGame()
         {
             RollMany(12, 10);
 
             Assert.AreEqual(300, g.Score());
+        }
+
+        [TestMethod]
+        public void TestAllNines()
+        {
+            RollMany(10, 9);
+
+            Assert.AreEqual(90, g.Score());
+        }
+
+        [TestMethod]
+        public void TestAllFives()
+        {
+            RollMany(21, 5);
+
+            Assert.AreEqual(150, g.Score());
         }
 
         private void RollStrike()

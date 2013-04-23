@@ -58,7 +58,7 @@ namespace BowlingGameKata
             {
                 bonus += lastRoll.NextRoll.Pins;
                 
-                if(lastRoll.NextRoll != null)
+                //if(lastRoll.NextRoll != null)
                     lastRoll = lastRoll.NextRoll;
             }
 
