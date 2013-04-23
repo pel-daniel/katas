@@ -22,7 +22,7 @@
                     score += 10 + StrikeBonus(frameIndex);
                     frameIndex++;
                 }
-                if (IsSpare(frameIndex)) 
+                else if (IsSpare(frameIndex)) 
                 {
                     score += 10 + SpareBonus(frameIndex);
                     frameIndex += 2;

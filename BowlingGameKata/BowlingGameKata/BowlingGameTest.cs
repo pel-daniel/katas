@@ -59,6 +59,14 @@ namespace BowlingGameKata
             Assert.AreEqual(24, g.Score());
         }
 
+        [TestMethod]
+        public void TestPerfectGame()
+        {
+            RollMany(12, 10);
+
+            Assert.AreEqual(300, g.Score());
+        }
+
         private void RollStrike()
         {
             g.Roll(10);
