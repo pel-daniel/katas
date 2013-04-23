@@ -2,14 +2,11 @@
 {
     public class Game
     {
+        public int Score { get; private set; }
+
         public void Roll(int pins)
         {
-            
-        }
-
-        public int Score()
-        {
-            return 0;
+            Score += pins;
         }
     }
 }
