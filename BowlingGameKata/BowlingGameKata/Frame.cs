@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BowlingGameKata
 {
     internal class Frame
     {
-        private const int Strike = 10;
-        private int[] rolls = new int[2];
-        private int rollIndex = 0;
+        private readonly List<Roll> rolls;
+
+        public Frame()
+        {
+            rolls = new List<Roll>();
+        }
 
         private bool IsSpare()
         {
@@ -15,22 +19,17 @@ namespace BowlingGameKata
 
         public bool IsStrike()
         {
-            return rolls.First() == Strike;
+            return rolls.Count == 1 && Score() == 10;
         }
 
         public bool HasTwoRolls()
         {
-            return rollIndex == 2;
-        }
-
-        public void Roll(int pins)
-        {
-            rolls[rollIndex++] = pins;
+            return rolls.Count == 2;
         }
 
         public int Score()
         {
-            return rolls.Sum();
+            return rolls.Sum(r => r.Pins);
         }
 
         public int NumberOfBonusRolls()
@@ -43,6 +42,27 @@ namespace BowlingGameKata
                 bonusRolls = 1;
 
             return bonusRolls;
+        }
+
+        public void AddRoll(Roll roll)
+        {
+            rolls.Add(roll);
+        }
+
+        public int Bonus()
+        {
+            var bonus = 0;
+            var lastRoll = rolls.Last();
+
+            for (var i = 0; i < NumberOfBonusRolls(); i++)
+            {
+                bonus += lastRoll.NextRoll.Pins;
+                
+                if(lastRoll.NextRoll != null)
+                    lastRoll = lastRoll.NextRoll;
+            }
+
+            return bonus;
         }
     }
 }
