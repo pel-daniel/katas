@@ -1,1 +1,6 @@
 E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\bin\Debug\BowlingGameKata.exe.config
+E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\bin\Debug\BowlingGameKata.exe
+E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\bin\Debug\BowlingGameKata.pdb
+E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\obj\Debug\BowlingGameKata.csprojResolveAssemblyReference.cache
+E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\obj\Debug\BowlingGameKata.exe
+E:\Programacion\Aprendizaje\Katas\BowlingGameKata\BowlingGameKata\obj\Debug\BowlingGameKata.pdb
