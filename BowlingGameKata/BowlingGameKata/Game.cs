@@ -34,7 +34,7 @@ namespace BowlingGameKata
 
         public int Score()
         {
-            return frames.Sum(f => f.Score() + f.Bonus());
+            return frames.Where(f => f.HasBonusRolls()).Sum(f => f.Score() + f.Bonus());
         }
 
         private Frame GetCurrentFrame()

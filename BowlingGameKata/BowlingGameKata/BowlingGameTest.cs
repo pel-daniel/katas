@@ -159,18 +159,18 @@ namespace BowlingGameKata
             Assert.AreEqual(75, g.Score());
         }
 
-        //[TestMethod]
-        //public void TestMiddlePerfectGame()
-        //{
-        //    RollStrike();
-        //    var s = g.Score();
-        //    RollStrike();
-        //    s = g.Score();
-        //    RollStrike();
-        //    s = g.Score();
-        //    RollStrike();
-        //    s = g.Score();
-        //}
+        [TestMethod]
+        public void TestMiddlePerfectGame()
+        {
+            RollStrike();
+            Assert.AreEqual(0, g.Score());
+            RollStrike();
+            Assert.AreEqual(0, g.Score());
+            RollStrike();
+            Assert.AreEqual(30, g.Score());
+            RollStrike();
+            Assert.AreEqual(60, g.Score());
+        }
 
         private void RollStrike()
         {
