@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BowlingGameKata
 {
@@ -17,6 +19,14 @@ namespace BowlingGameKata
         {
             for (var i = 0; i < n; i++)
                 g.Roll(pins);
+        }
+
+        private void RollMany(IEnumerable<int> pinsList)
+        {
+            foreach (var pin in pinsList)
+            {
+                g.Roll(pin);
+            }
         }
 
         [TestMethod]
@@ -115,6 +125,52 @@ namespace BowlingGameKata
 
             Assert.AreEqual(150, g.Score());
         }
+
+        [TestMethod]
+        public void TestMiddleGameScore()
+        {
+            g.Roll(0);
+            Assert.AreEqual(0, g.Score());
+
+            g.Roll(1);
+            Assert.AreEqual(1, g.Score());
+        }
+
+        [TestMethod]
+        public void TestNoStrikeNoSpareGame()
+        {
+            RollMany(Enumerable.Repeat(new[] { 0, 1, 3, 2 }, 5).SelectMany(l => l));
+            Assert.AreEqual(30, g.Score());
+        }
+
+        [TestMethod]
+        public void TestStrikeSpareGame()
+        {
+            RollMany(new []{ 0, 1,  
+                             3, 2,
+                             10,  
+                             1, 3, 
+                             2, 8,  
+                             10, 
+                             3, 2, 
+                             0, 1,  
+                             3, 2,  
+                             4, 1 });
+            Assert.AreEqual(75, g.Score());
+        }
+
+        //[TestMethod]
+        //public void TestMiddlePerfectGame()
+        //{
+        //    RollStrike();
+        //    var s = g.Score();
+        //    RollStrike();
+        //    s = g.Score();
+        //    RollStrike();
+        //    s = g.Score();
+        //    RollStrike();
+        //    s = g.Score();
+        //}
 
         private void RollStrike()
         {
