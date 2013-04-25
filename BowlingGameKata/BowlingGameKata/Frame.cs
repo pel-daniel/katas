@@ -51,31 +51,14 @@ namespace BowlingGameKata
 
         public FrameSummary FrameSummary()
         {
-            var numberOfBonusRolls = NumberOfBonusRolls();
-            var lastRoll = rolls.Last();
+            var bonusStatus = rolls.Last().RollSummary(NumberOfBonusRolls());
 
             return new FrameSummary
             {
-                Bonus = Bonus(numberOfBonusRolls, lastRoll),
-                HasBonusRolls = HasBonusRolls(numberOfBonusRolls, lastRoll),
+                Bonus = bonusStatus.BonusScore,
+                HasBonusRolls = bonusStatus.HasBonusRolls,
                 Score = Score()
             };
-        }
-
-        private int Bonus(int numberOfBonusRolls, Roll lastRoll)
-        {
-            if (numberOfBonusRolls == 0 || lastRoll.NextRoll == null)
-                return 0;
-
-            return lastRoll.NextRoll.Pins + Bonus(numberOfBonusRolls - 1, lastRoll.NextRoll);
-        }
-
-        private bool HasBonusRolls(int numberOfBonusRolls, Roll lastRoll)
-        {
-            if (numberOfBonusRolls == 0)
-                return true;
-
-            return lastRoll.NextRoll != null && HasBonusRolls(numberOfBonusRolls - 1, lastRoll.NextRoll);
         }
     }
 }
