@@ -49,9 +49,17 @@ namespace BowlingGameKata
             rolls.Add(roll);
         }
 
-        public int Bonus()
+        public FrameSummary FrameSummary()
         {
-            return Bonus(NumberOfBonusRolls(), rolls.Last());
+            var numberOfBonusRolls = NumberOfBonusRolls();
+            var lastRoll = rolls.Last();
+
+            return new FrameSummary
+            {
+                Bonus = Bonus(numberOfBonusRolls, lastRoll),
+                HasBonusRolls = HasBonusRolls(numberOfBonusRolls, lastRoll),
+                Score = Score()
+            };
         }
 
         private int Bonus(int numberOfBonusRolls, Roll lastRoll)
@@ -60,11 +68,6 @@ namespace BowlingGameKata
                 return 0;
 
             return lastRoll.NextRoll.Pins + Bonus(numberOfBonusRolls - 1, lastRoll.NextRoll);
-        }
-
-        public bool HasBonusRolls()
-        {
-            return HasBonusRolls(NumberOfBonusRolls(), rolls.Last());
         }
 
         private bool HasBonusRolls(int numberOfBonusRolls, Roll lastRoll)
