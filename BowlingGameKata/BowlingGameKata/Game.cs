@@ -34,18 +34,24 @@ namespace BowlingGameKata
 
         public int Score()
         {
-            return frames.Take(FramesPerGame).Select(f => f.Score() + f.Bonus()).Sum();
+            return frames.Sum(f => f.Score() + f.Bonus());
         }
 
         private Frame GetCurrentFrame()
         {
-            if (frames.Count != FramesPerGame && (currentFrame.IsStrike() || currentFrame.HasTwoRolls()))
+            if (IsNotLastFrame() && // Last frame can have 3 rolls
+                (currentFrame.IsStrike() || currentFrame.HasTwoRolls()))
             {
                 currentFrame = new Frame();
                 frames.Add(currentFrame);
             }
 
             return currentFrame;
+        }
+
+        private bool IsNotLastFrame()
+        {
+            return frames.Count != FramesPerGame;
         }
 
         private bool FirstRoll()

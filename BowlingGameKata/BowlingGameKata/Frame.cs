@@ -51,18 +51,15 @@ namespace BowlingGameKata
 
         public int Bonus()
         {
-            var bonus = 0;
-            var lastRoll = rolls.Last();
+            return Bonus(NumberOfBonusRolls(), rolls.Last());
+        }
 
-            for (var i = 0; i < NumberOfBonusRolls(); i++)
-            {
-                bonus += lastRoll.NextRoll.Pins;
-                
-                //if(lastRoll.NextRoll != null)
-                    lastRoll = lastRoll.NextRoll;
-            }
+        private int Bonus(int numberOfBonusRolls, Roll lastRoll)
+        {
+            if (numberOfBonusRolls == 0 || lastRoll.NextRoll == null)
+                return 0;
 
-            return bonus;
+            return lastRoll.NextRoll.Pins + Bonus(numberOfBonusRolls - 1, lastRoll.NextRoll);
         }
     }
 }
